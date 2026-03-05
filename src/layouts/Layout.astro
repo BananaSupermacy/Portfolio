@@ -1,0 +1,185 @@
+---
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+    title?: string;
+}
+
+const { title = "Portfolio" } = Astro.props;
+---
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+    <ClientRouter />
+
+    <style is:global>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        html, body {
+            margin: 0;
+            height: 100%;
+            background: #0D1117;
+            color: #adbac7;
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 300;
+        }
+
+        /* ── scrollbar ───────────────────────────────────────────── */
+
+        * {
+            scrollbar-width: none;
+        }
+
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ── mini console ────────────────────────────────────────── */
+
+        .console {
+            margin: 0;
+            padding: 48px 10%;
+            box-sizing: border-box;
+            background: #0D1117;
+            color: #adbac7;
+            width: 100%;
+            height: 100%;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.8;
+            overflow-y: auto;
+        }
+
+        #output {
+            white-space: pre-wrap;
+        }
+
+        /* ── topbar ──────────────────────────────────────────────── */
+
+        #topbar {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: fit-content;
+            z-index: 999;
+
+            opacity: 0;
+            transition: opacity 0.5s ease;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.5;
+
+            background: #0D1117;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            padding: 8px 20px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+            display: flex;
+            align-items: center;
+            gap: 24px;
+
+            user-select: none;
+        }
+
+        #topbar a {
+            color: #768390;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        #topbar a:hover {
+            color: #cdd9e5;
+        }
+
+        /* ── boxes ───────────────────────────────────────────────── */
+
+        .box {
+            background: #0D1117;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .box-header {
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #21262d;
+            color: #4d9375;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .box-content {
+            color: #adbac7;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* ── divider ─────────────────────────────────────────────── */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #3d444d;
+            font-size: 12px;
+            margin: 24px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-top: 1px solid #21262d;
+        }
+
+        /* ── portfolio page ──────────────────────────────────────── */
+
+        #portfolio {
+            opacity: 0;
+            display: none;
+            transition: opacity 0.8s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav id="topbar" transition:persist>
+    <a href="/">Home</a>
+    <a href="/projects">Projects</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+</nav>
+
+<div class="console" id="mini-console-shell" transition:persist>
+    <div id="output"></div>
+</div>
+
+<slot />
+
+<script is:inline src="/scripts/miniConsole.js"></script>
+
+</body>
+</html>
