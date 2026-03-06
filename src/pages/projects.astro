@@ -2,8 +2,41 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
+<style>
+    .filterBox {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%);
+
+        width: fit-content;
+        z-index: 999;
+
+        opacity: 0;
+        transition: opacity 0.5s ease;
+
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15px;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        line-height: 1.5;
+
+        background: #0D1117;
+        border: 1px solid #21262d;
+        border-radius: 8px;
+        padding: 8px 20px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+        display: flex;
+        align-items: center;
+        gap: 24px;
+
+        user-select: none;
+    }
+</style>
+
 <Layout title="About">
     <div style="padding-top: 100px">
-        <h1>HEYO HEYO</h1>
+        <div class="filterBox"></div>
     </div>
 </Layout>
