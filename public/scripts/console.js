@@ -1,4 +1,4 @@
-import lines from '/public/consoleLines.json';
+import lines from '/consoleLines.json';
 
 console.log("console.js loaded");
 console.log("consoleEl:", document.querySelector(".console"));
