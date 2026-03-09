@@ -1,0 +1,10 @@
+{
+  "featured": false,
+  "name": "Bipropelant rocket engine",
+  "tags": ["Hardware", "Engineering", "CAD", "Personal", "Completed", "Full"],
+  "description": "Used Maxwell Equations bozo",
+  "date": "06/03/2026",
+  "duration": "3 months",
+  "links": [
+    {"name":  "Github", "link":  "https://github.com/BananaSupermacy/Solution-V0"}
+  ]}

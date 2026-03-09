@@ -1,0 +1,10 @@
+{
+  "featured": false,
+  "name": "Electromagnetic wave simulation",
+  "tags": ["Software", "Engineering", "C++", "Personal", "Completed", "Full"],
+  "description": "Used Maxwell Equations bozo",
+  "date": "01/01/2026",
+  "duration": "1 month",
+  "links": [
+    {"name":  "Github", "link":  "https://github.com/BananaSupermacy/VBEMWS"}
+  ]}

@@ -2,21 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<style>
+<style is:global>
     .filterBox {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%);
-
         width: fit-content;
         z-index: 999;
 
-        opacity: 0;
-        transition: opacity 0.5s ease;
-
         font-family: "JetBrains Mono", monospace;
-        font-size: 15px;
+        font-size: 12px;
         font-weight: 300;
         letter-spacing: 0.05em;
         line-height: 1.5;
@@ -24,7 +16,7 @@ import Layout from '../layouts/Layout.astro';
         background: #0D1117;
         border: 1px solid #21262d;
         border-radius: 8px;
-        padding: 8px 20px;
+        padding: 2px 10px;
         box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 
         display: flex;
@@ -32,11 +24,184 @@ import Layout from '../layouts/Layout.astro';
         gap: 24px;
 
         user-select: none;
+        transition: border-color 0.2s ease;
+        cursor: pointer;
+    }
+
+    .filterBox:hover { border-color: #cdd9e5; }
+    .filterBox.active { border-color: #cdd9e5; }
+    .filterBox.active:hover { border-color: #21262d; }
+
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dropdown-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .arrow {
+        display: inline-block;
+        transition: transform 0.2s ease;
+        font-style: normal;
+    }
+
+    .dropdown.open .arrow {
+        transform: rotate(90deg);
+    }
+
+    .dropdown-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 0;
+        width: 400px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, max-height 0.3s ease, margin-top 0.3s ease, visibility 0.3s;
+    }
+
+    .dropdown.open .dropdown-list {
+        max-height: 500px;
+        opacity: 1;
+        visibility: visible;
+        margin-top: 8px;
+    }
+
+    #filterDropdowns {
+        position: fixed;
+        top: 100px;
+        left: 24px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #projectsGrid {
+        position: fixed;
+        left: 350px;
+        top: 100px;
+        width: calc(80vw - 270px);
+
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow-y: auto;
+        height: calc(100vh - 120px);
+        padding-right: 20px;
+    }
+
+    .project-card {
+        width: 100%;
+
+        background: #0D1117;
+        border: 1px solid #21262d;
+        border-radius: 8px;
+        padding: 16px 20px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 300;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: border-color 0.2s ease;
+        cursor: pointer;
+
+        overflow: hidden;
+        transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+        max-height: 500px; /* larger than any card will ever be */
+    }
+
+
+    .project-card:hover {
+        border-color: #cdd9e5;
+    }
+
+    .project-card.featured {
+        border-color: #4d9375;
+    }
+
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #21262d;
+        padding-bottom: 10px;
+    }
+
+    .project-name {
+        color: #cdd9e5;
+        font-size: 13px;
+    }
+
+    .project-date {
+        color: #3d444d;
+        font-size: 11px;
+    }
+
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .tag {
+        color: #4d9375;
+        font-size: 11px;
+        border: 1px solid #21262d;
+        border-radius: 4px;
+        padding: 1px 6px;
+    }
+
+    .project-description {
+        color: #768390;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .project-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #21262d;
+        padding-top: 10px;
+    }
+
+    .project-duration {
+        color: #3d444d;
+        font-size: 11px;
+    }
+
+    .project-link {
+        color: #768390;
+        font-size: 11px;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .project-link:hover {
+        color: #cdd9e5;
     }
 </style>
 
-<Layout title="About">
+
+<Layout title="Projects">
+
     <div style="padding-top: 100px">
-        <div class="filterBox"></div>
+        <div id="filterDropdowns"></div>
     </div>
+
+    <div id="projectsGrid">
+
+    </div>
+
+    <script src="/scripts/projectsLoader.js" type="module"></script>
 </Layout>

@@ -2,13 +2,49 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Portfolio">
-
+<Layout title="Home">
     <div id="portfolio">
+        <div id="intro">
+            <div class="intro-line" id="l1">
+                <span class="intro-prompt">$</span>
+                <span class="intro-text dim">whoami</span>
+            </div>
+            <div class="intro-line" id="l2">
+                <span class="intro-prompt">→</span>
+                <span class="intro-text bright">Mateusz &mdash; hardware &amp; software engineer</span>
+            </div>
 
+            <div class="intro-spacer"></div>
+
+            <div class="intro-line" id="l3">
+                <span class="intro-prompt">$</span>
+                <span class="intro-text dim">cat interests.txt</span>
+            </div>
+            <div class="intro-line" id="l4">
+                <span class="intro-prompt">→</span>
+                <span class="intro-text">custom PCBs &nbsp;·&nbsp; rocket engines &nbsp;·&nbsp; EM simulations</span>
+            </div>
+            <div class="intro-line" id="l5">
+                <span class="intro-prompt"> </span>
+                <span class="intro-text">games &nbsp;·&nbsp; software &nbsp;·&nbsp; CAD</span>
+            </div>
+
+            <div class="intro-spacer"></div>
+
+            <div class="intro-line" id="l6">
+                <span class="intro-prompt">$</span>
+                <span class="intro-text dim">ls ./contact</span>
+            </div>
+            <div class="intro-line" id="l7">
+                <span class="intro-prompt">→</span>
+                <div class="intro-links">
+                    <a href="https://github.com/BananaSupermacy" class="intro-link" target="_blank" rel="noopener noreferrer">github ↗</a>
+                    <a href="https://discord.com/users/1137334544429760593" class="intro-link" target="_blank" rel="noopener noreferrer">discord ↗</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script is:inline src="/scripts/miniConsole.js"></script>
-    <script is:inline src="/scripts/console.js"></script>
-
+    <script type="module" src="/scripts/console.js"></script>
+    <script type="module" src="/scripts/home.js"></script>
 </Layout>

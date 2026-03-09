@@ -1,0 +1,7 @@
+[
+  {"id":  1,  "title": "Contribution",  "content": ["Full", "Partial"]},
+  {"id":  2,  "title": "Type",          "content": ["Hardware", "Software", "Engineering"]},
+  {"id":  3,  "title": "Tools",         "content": ["Python", "C++", "Assembly", "CAD"]},
+  {"id":  4,  "title": "Client Type",   "content": ["Personal", "Client", "Academic"]},
+  {"id":  4,  "title": "Status",        "content": ["Completed", "In Progress", "Abandoned"]}
+]

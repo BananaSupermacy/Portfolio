@@ -1,3 +1,5 @@
+import lines from '/public/consoleLines.json';
+
 console.log("console.js loaded");
 console.log("consoleEl:", document.querySelector(".console"));
 console.log("consoleText:", document.getElementById("output"));
@@ -6,21 +8,15 @@ const consoleText = document.getElementById("output");
 const consoleEl   = document.querySelector(".console");
 
 let currentChoice  = "";
-let lines          = [];
 let cursorInterval = null;
 
-// lock scroll and selection while booting
+
 consoleEl.style.overflow   = "hidden";
 consoleEl.style.userSelect = "none";
 
-fetch('/consoleLines.json')
-    .then(res => res.json())
-    .then(json => {
-        lines = json;
-        consoleText.appendChild(parseLine(lines[0].text));
-        appendPrompt();
-    })
-    .catch(err => console.error("Failed to load JSON:", err));
+
+consoleText.appendChild(parseLine(lines[0].text));
+appendPrompt();
 
 // ── line parser ───────────────────────────────────────────────────────────────
 
@@ -253,6 +249,8 @@ function printOutput() {
     function next() {
         if (i >= remaining.length) {
             removeCursor();
+
+            document.body.style.overflow = 'auto';
             consoleEl.style.overflow   = "auto";
             consoleEl.style.userSelect = "auto";
 
