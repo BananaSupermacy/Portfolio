@@ -1,4 +1,6 @@
-import lines from '/consoleLines.json';
+fetch('/consoleLines.json')
+  .then(res => res.json())
+  .then(lines => {
 
 console.log("console.js loaded");
 console.log("consoleEl:", document.querySelector(".console"));
@@ -178,7 +180,6 @@ function clearTerminal(callback) {
 function minimizeToCorner() {
     sessionStorage.setItem("consoleMinimized", "true");
 
-    // show portfolio
     const portfolio = document.getElementById("portfolio");
     if (portfolio) {
         portfolio.style.display = "block";
@@ -187,7 +188,6 @@ function minimizeToCorner() {
 
     const rect = consoleEl.getBoundingClientRect();
 
-    // lock to current position before animating
     consoleEl.style.position = "fixed";
     consoleEl.style.top      = rect.top    + "px";
     consoleEl.style.left     = rect.left   + "px";
@@ -197,7 +197,6 @@ function minimizeToCorner() {
     consoleEl.style.overflow = "hidden";
     consoleEl.style.zIndex   = "999";
 
-    // add label
     const label = document.createElement("div");
     label.id    = "mini-label";
     label.style.cssText = `
@@ -210,7 +209,6 @@ function minimizeToCorner() {
     label.textContent = "guest@localhost ~";
     consoleEl.prepend(label);
 
-    // animate to pill
     requestAnimationFrame(() => {
         consoleEl.style.transition   = "all 0.7s cubic-bezier(0.76, 0, 0.24, 1)";
         consoleEl.style.top          = "24px";
@@ -325,3 +323,5 @@ function handleKey(event) {
 }
 
 document.addEventListener("keydown", handleKey);
+
+});
